@@ -5,8 +5,9 @@
     <input type="file" hidden (change)="importExcel($event)" #fileInput />
     <button mat-raised-button (click)="fileInput.click()">Import from Excel</button>
   </label>
-  <mat-form-field appearance="outline" class="search">
-    <mat-label>Search</mat-label>
+ 
+  <mat-form-field appearance="outline" class="search-container">
+    
     <input matInput [formControl]="search" placeholder="Search" />
   </mat-form-field>
 </div>
