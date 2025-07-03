@@ -16,7 +16,7 @@ try {
 } finally {
     Pop-Location
 }
-
+Write-Output "done.. npx ng build"
 $distDir = Join-Path $projectRoot 'dist/employee-app'
 if (!(Test-Path $distDir)) {
     Write-Error "Build output directory not found: $distDir"
