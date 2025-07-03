@@ -34,7 +34,7 @@ import { ConfirmDialogComponent } from '../shared/confirm-dialog.component';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['id', 'name', 'email', 'phone', 'actions'];
+  displayedColumns = ['employeeID', 'name', 'doj', 'department', 'actions'];
   dataSource = new MatTableDataSource<Employee>([]);
   search = new FormControl('');
 
@@ -83,7 +83,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.service.update(emp.id!, result).subscribe(() => this.load());
+        this.service.update(emp.employeeID!, result).subscribe(() => this.load());
       }
     });
   }
@@ -94,7 +94,7 @@ export class EmployeesComponent implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.service.delete(emp.id!).subscribe(() => this.load());
+        this.service.delete(emp.employeeID!).subscribe(() => this.load());
       }
     });
   }
@@ -146,8 +146,8 @@ export class EmployeeDialog {
   ) {
     this.form = this.fb.group({
       name: [data.name, Validators.required],
-      email: [data.email, [Validators.required, Validators.email]],
-      phone: [data.phone, Validators.required]
+      doj: [data.doj],
+      department: [data.department, Validators.required]
     });
   }
 
