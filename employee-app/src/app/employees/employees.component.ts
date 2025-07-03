@@ -1,15 +1,19 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmployeesService } from '../services/employees.service';
 import { Employee } from '../models/employee';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule, FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog.component';
 
 @Component({
   selector: 'app-employees',
@@ -20,23 +24,39 @@ import * as XLSX from 'xlsx';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
-export class EmployeesComponent implements OnInit {
-  employees: Employee[] = [];
+export class EmployeesComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name', 'email', 'phone', 'actions'];
+  dataSource = new MatTableDataSource<Employee>([]);
+  search = new FormControl('');
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private service: EmployeesService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.load();
+    this.search.valueChanges.pipe(debounceTime(300)).subscribe(value => {
+      this.dataSource.filter = (value || '').trim().toLowerCase();
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   load(): void {
     this.service.getAll().subscribe({
-      next: data => (this.employees = data),
+      next: data => (this.dataSource.data = data),
       error: err => console.error(err)
     });
   }
@@ -68,9 +88,14 @@ export class EmployeesComponent implements OnInit {
   }
 
   delete(emp: Employee): void {
-    if (confirm('Delete employee?')) {
-      this.service.delete(emp.id!).subscribe(() => this.load());
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: 'Delete employee?'
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.service.delete(emp.id!).subscribe(() => this.load());
+      }
+    });
   }
 
   importExcel(event: any): void {
@@ -89,7 +114,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   exportExcel(): void {
-    const worksheet = XLSX.utils.json_to_sheet(this.employees);
+    const worksheet = XLSX.utils.json_to_sheet(this.dataSource.data);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Employees');
     XLSX.writeFile(workbook, 'employees.xlsx');
