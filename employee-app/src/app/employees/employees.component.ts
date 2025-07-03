@@ -1,12 +1,26 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { EmployeesService } from '../services/employees.service';
 import { Employee } from '../models/employee';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-employees',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule,
+  ],
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.css']
 })
@@ -84,6 +98,16 @@ export class EmployeesComponent implements OnInit {
 
 @Component({
   selector: 'employee-dialog',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   templateUrl: './employee-dialog.html'
 })
 export class EmployeeDialog {
