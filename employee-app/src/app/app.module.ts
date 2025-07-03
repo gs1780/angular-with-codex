@@ -11,12 +11,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppComponent } from './app.component';
-import { EmployeesComponent } from './employees/employees.component';
+import { EmployeesComponent, EmployeeDialog } from './employees/employees.component';
 
 @NgModule({
-  declarations: [AppComponent, EmployeesComponent],
+  declarations: [AppComponent, EmployeesComponent, EmployeeDialog],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,6 +31,7 @@ import { EmployeesComponent } from './employees/employees.component';
     MatTableModule,
     MatDialogModule,
     MatInputModule,
+    MatFormFieldModule,
   ],
   bootstrap: [AppComponent],
 })
