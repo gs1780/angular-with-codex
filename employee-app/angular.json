@@ -23,7 +23,54 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "dev": {
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.ts"
+              }],
+              "optimization": false,
+              "sourceMap": true
+            },
+            "pre-test": {
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.pre-test.ts"
+              }],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "test": {
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.test.ts"
+              }],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "uat": {
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.uat.ts"
+              }],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "prod": {
               "fileReplacements": [{
                 "replace": "src/environments/environment.ts",
                 "with": "src/environments/environment.prod.ts"
@@ -44,8 +91,20 @@
             "browserTarget": "employee-app:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "employee-app:build:production"
+            "dev": {
+              "browserTarget": "employee-app:build:dev"
+            },
+            "pre-test": {
+              "browserTarget": "employee-app:build:pre-test"
+            },
+            "test": {
+              "browserTarget": "employee-app:build:test"
+            },
+            "uat": {
+              "browserTarget": "employee-app:build:uat"
+            },
+            "prod": {
+              "browserTarget": "employee-app:build:prod"
             }
           }
         },
