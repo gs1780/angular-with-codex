@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header, footer {
+  padding: 1rem;
+  background-color: #1976d2;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+nav {
+  padding: 1rem;
+  background: #f5f5f5;
+}
+
+main {
+  padding: 1rem;
+}
+
+.table-actions button {
+  margin-right: 0.5rem;
+}
+.w-100 { width: 100%; }
