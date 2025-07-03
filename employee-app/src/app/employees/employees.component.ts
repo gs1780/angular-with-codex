@@ -84,7 +84,7 @@ export class EmployeesComponent implements OnInit {
 
 @Component({
   selector: 'employee-dialog',
-  templateUrl: 'employee-dialog.html'
+  templateUrl: './employee-dialog.html'
 })
 export class EmployeeDialog {
   form: FormGroup;
