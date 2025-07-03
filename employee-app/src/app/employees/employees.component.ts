@@ -34,7 +34,7 @@ import { ConfirmDialogComponent } from '../shared/confirm-dialog.component';
   styleUrls: ['./employees.component.css']
 })
 export class EmployeesComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['name', 'email', 'phone', 'actions'];
+  displayedColumns = ['id', 'name', 'email', 'phone', 'actions'];
   dataSource = new MatTableDataSource<Employee>([]);
   search = new FormControl('');
 
