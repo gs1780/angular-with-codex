@@ -1,7 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/angular-cli",
   "version": 1,
-  "defaultProject": "employee-app",
   "projects": {
     "employee-app": {
       "projectType": "application",
@@ -88,23 +87,23 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "employee-app:build"
+            "buildTarget": "employee-app:build"
           },
           "configurations": {
             "dev": {
-              "browserTarget": "employee-app:build:dev"
+              "buildTarget": "employee-app:build:dev"
             },
             "pre-test": {
-              "browserTarget": "employee-app:build:pre-test"
+              "buildTarget": "employee-app:build:pre-test"
             },
             "test": {
-              "browserTarget": "employee-app:build:test"
+              "buildTarget": "employee-app:build:test"
             },
             "uat": {
-              "browserTarget": "employee-app:build:uat"
+              "buildTarget": "employee-app:build:uat"
             },
             "prod": {
-              "browserTarget": "employee-app:build:prod"
+              "buildTarget": "employee-app:build:prod"
             }
           }
         },
