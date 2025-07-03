@@ -1,0 +1,38 @@
+<div class="actions">
+  <button mat-raised-button color="primary" (click)="openAdd()">Add Department</button>
+  <button mat-raised-button (click)="exportExcel()">Export to Excel</button>
+  <label>
+    <input type="file" hidden (change)="importExcel($event)" #fileInput />
+    <button mat-raised-button (click)="fileInput.click()">Import from Excel</button>
+  </label>
+  <mat-form-field appearance="outline" class="search">
+    <mat-label>Search</mat-label>
+    <input matInput [formControl]="search" placeholder="Search" />
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 full-width">
+  <ng-container matColumnDef="department">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+    <td mat-cell *matCellDef="let element">{{element.department}}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element" class="table-actions">
+      <button mat-icon-button color="accent" (click)="openEdit(element)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete(element)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="2">No departments found.</td>
+  </tr>
+</table>
+
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
