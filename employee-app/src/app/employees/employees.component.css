@@ -1,7 +1,20 @@
 .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
   margin-bottom: 1rem;
+}
+
+.search {
+  margin-left: auto;
 }
 
 .table-actions {
   display: flex;
+  gap: 0.5rem;
+}
+
+.full-width {
+  width: 100%;
 }

@@ -1,0 +1,39 @@
+.layout-container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+header {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav {
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  background: #f5f5f5;
+}
+
+main {
+  padding: 1rem;
+}
+
+footer {
+  grid-column: 1 / -1;
+  position: sticky;
+  bottom: 0;
+  background-color: #1976d2;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+.active-link {
+  font-weight: bold;
+}
