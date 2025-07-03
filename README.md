@@ -14,7 +14,7 @@ The script installs dependencies, runs the Angular build for the specified confi
 
 ### Deploy to Azure
 
-Use the `deploy-to-azure.ps1` script to build the Angular project with the default `dev` configuration and push the static content to an Azure App Service. The script assumes the resource group and app service plan already exist and will create the web app if needed.
+Use the `deploy-to-azure.ps1` script to build the Angular project with the default `dev` configuration and push the static content to an Azure App Service. The script assumes the resource group and app service plan already exist and will create the web app if needed. The deploy script targets the Node 20 runtime and uses `az webapp deploy` to publish a ZIP archive.
 
 ```powershell
 pwsh ./scripts/deploy-to-azure.ps1
