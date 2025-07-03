@@ -26,6 +26,7 @@ import { ConfirmDialogComponent } from '../shared/confirm-dialog.component';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    ReactiveFormsModule,
     MatPaginatorModule,
     MatSortModule,
   ],
