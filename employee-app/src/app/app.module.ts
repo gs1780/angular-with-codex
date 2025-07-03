@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { EmployeesComponent, EmployeeDialog } from './employees/employees.component';
 
 @NgModule({
-  declarations: [AppComponent, EmployeesComponent, EmployeeDialog],
+  declarations: [],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -32,6 +32,9 @@ import { EmployeesComponent, EmployeeDialog } from './employees/employees.compon
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
+    AppComponent,
+    EmployeesComponent,
+    EmployeeDialog,
   ],
   bootstrap: [AppComponent],
 })
