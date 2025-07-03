@@ -1,0 +1,26 @@
+# Ignore Node and Angular dependencies
+node_modules/
+**/node_modules/
+
+# Angular build outputs
+dist/
+coverage/
+
+**/dist/
+.angular/
+
+# Build artifacts created by helper scripts
+publish.zip
+
+# Log files
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# IDE directories
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
