@@ -39,9 +39,8 @@ Get-ChildItem -Path $distDir -Recurse | Where-Object { -not $_.PSIsContainer } |
 $zip.Dispose()
 
 # Create the Web App and deploy the ZIP
-# The pipe character must be escaped for the underlying cmd process
-# so use `node^|20-lts` to specify the runtime version.
-az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime node^|20-lts --query name -o tsv
+# Quote the runtime so the pipe character is passed correctly
+az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime "node|20-lts" --query name -o tsv
 az webapp deploy --resource-group $ResourceGroup --name $WebAppName --src-path $zipPath
 
 Write-Host "Deployment complete: $WebAppName"
