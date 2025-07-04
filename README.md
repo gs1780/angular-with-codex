@@ -25,3 +25,9 @@ Default parameters:
 - `PlanName`: `india-app-plan-3749`
 - `Location`: `Central India`
 - `WebAppName`: `angular-static-app-3749`
+
+## Running with Express
+
+After building the Angular project, deploy the contents of the `dist/` folder along with `server.js` and `package.json` to Azure App Service. The Express server automatically serves files from the generated subfolder (for example `dist/employee-app`) and routes all requests to `index.html`.
+
+On Azure the service will run `npm start` which launches `server.js`.
