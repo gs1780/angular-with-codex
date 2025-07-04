@@ -6,7 +6,7 @@ param(
     [string]$Location = "Central India",
     [string]$WebAppName = "angular-static-app-3749"
 )
-
+clear-host
 $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
@@ -38,9 +38,16 @@ Get-ChildItem -Path $distDir -Recurse | Where-Object { -not $_.PSIsContainer } |
 }
 $zip.Dispose()
 
+Write-Output "start.. az webapp create "
 # Create the Web App and deploy the ZIP
 # Quote the runtime so the pipe character is passed correctly
-az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime "node|20-lts" --query name -o tsv
-az webapp deploy --resource-group $ResourceGroup --name $WebAppName --src-path $zipPath
+Write-Output "az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime ""node|20-lts"" --query name -o tsv"
+az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime "node:20-lts" --query name -o tsv
+Write-Output "done.. az webapp create "
+Write-Output "****************************************************************************"
+Write-Output "start.. az webapp deploy  "
+Write-Output "az webapp deploy --resource-group $ResourceGroup --name $WebAppName --src-path $zipPath"
 
+az webapp deploy --resource-group $ResourceGroup --name $WebAppName --src-path $zipPath
+Write-Output "done.. az webapp deploy  "
 Write-Host "Deployment complete: $WebAppName"
