@@ -27,6 +27,13 @@ if (!(Test-Path $distDir)) {
     exit 1
 }
 
+# Copy the Express server files into the build output so they are included in
+# the deployment ZIP archive. These files reside at the repository root.
+$serverSrc = Join-Path $root 'server.js'
+$packageSrc = Join-Path $root 'package.json'
+if (Test-Path $serverSrc) { Copy-Item $serverSrc -Destination $distDir -Force }
+if (Test-Path $packageSrc) { Copy-Item $packageSrc -Destination $distDir -Force }
+
 $zipPath = Join-Path $root 'publish.zip'
 if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
 
