@@ -41,8 +41,8 @@ $zip.Dispose()
 Write-Output "start.. az webapp create "
 # Create the Web App and deploy the ZIP
 # Quote the runtime so the pipe character is passed correctly
-Write-Output "az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime ""node|20-lts"" --query name -o tsv"
-az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime "node:20-lts" --query name -o tsv
+Write-Output "az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime \"node|20-lts\" --query name -o tsv"
+az webapp create --resource-group $ResourceGroup --plan $PlanName --name $WebAppName --runtime "node|20-lts" --query name -o tsv
 Write-Output "done.. az webapp create "
 Write-Output "****************************************************************************"
 Write-Output "start.. az webapp deploy  "
