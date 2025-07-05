@@ -1,11 +1,9 @@
-# Build Angular project, create zip, and deploy to Azure Static Web App
+# Build Angular project and deploy the published files to Azure Static Web App
 param(
     [string]$Configuration = "prod",
     [string]$WebAppName = "eastasia-static-angular",
     [string]$ResourceGroup = "eastasia-rg1",
-    [string]$Location = "East Asia",
-    [string]$ZipName = "publish.zip",
-    [string]$SevenZipPath = 'C:\Program Files\7-Zip\7z.exe'
+    [string]$Location = "East Asia"
 )
 
 $ErrorActionPreference = 'Stop'
@@ -19,13 +17,13 @@ if (-not $staticWebExt) {
     az extension add --name staticwebapp | Out-Null
 }
 
-# Build and archive the Angular project
-$buildScript = Join-Path $PSScriptRoot 'install-build-zip.ps1'
-Write-Host "Building Angular project and creating archive..."
-& $buildScript -Configuration $Configuration -ZipName $ZipName -SevenZipPath $SevenZipPath
-Write-Host "Package build finished"
+# Build the Angular project
+$buildScript = Join-Path $PSScriptRoot 'install-build.ps1'
+Write-Host "Building Angular project..."
+& $buildScript -Configuration $Configuration
+Write-Host "Build completed"
 
-$zipPath = Join-Path $root $ZipName
+$sourcePath = Join-Path $root 'employee-app/dist/employee-app'
 
 
 # Ensure the static web app exists, creating it if necessary
@@ -45,9 +43,9 @@ if (-not $exists) {
     Write-Host "Static web app exists"
 }
 
-# Deploy the zipped build output
-Write-Host "Uploading package $zipPath to $WebAppName..."
+# Deploy the published files
+Write-Host "Uploading $sourcePath to $WebAppName..."
 az staticwebapp upload --name $WebAppName --resource-group $ResourceGroup `
-    --artifact-path $zipPath | Out-Null
+    --source $sourcePath | Out-Null
 
 Write-Host "Deployment completed to $WebAppName"
