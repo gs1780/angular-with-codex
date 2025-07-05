@@ -2,7 +2,7 @@
 param(
     [string]$Configuration = "prod",
     [string]$ZipName = "publish.zip",
-    [string]$SevenZipPath = "7z"
+    [string]$SevenZipPath = 'C:\Program Files\7-Zip\7z.exe'
 )
 
 $ErrorActionPreference = 'Stop'
