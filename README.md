@@ -14,6 +14,13 @@ The script installs dependencies, runs the Angular build for the specified confi
 
 ### Deploy to Azure
 
+Ensure that the Azure Static Web Apps CLI extension is installed or updated so
+the `upload` command is available:
+
+```powershell
+az extension add --name staticwebapp
+```
+
 Run the `deploy-eastasia-static-app.ps1` script to build the Angular project and
 push the generated files to an Azure Static Web App. The script checks whether
 the static web app exists and creates it using `az staticwebapp create` if
