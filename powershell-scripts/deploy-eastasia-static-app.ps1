@@ -12,6 +12,13 @@ $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
 
+# Ensure the Azure Static Web Apps extension is installed
+$staticWebExt = az extension list --query "[?name=='staticwebapp']" -o tsv
+if (-not $staticWebExt) {
+    Write-Host "Installing Azure Static Web Apps extension..."
+    az extension add --name staticwebapp | Out-Null
+}
+
 # Build and archive the Angular project
 $buildScript = Join-Path $PSScriptRoot 'install-build-zip.ps1'
 Write-Host "Building Angular project and creating archive..."
