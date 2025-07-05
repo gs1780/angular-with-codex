@@ -1,7 +1,7 @@
 # Install dependencies, build the Angular app, and serve it locally
 param(
     [string]$Configuration = "dev",
-    [string]$Host = "localhost",
+    [string]$ServeHost = "localhost",
     [int]$Port = 4200
 )
 
@@ -14,7 +14,7 @@ Push-Location $projectRoot
 try {
     npm install --no-audit --no-fund
     npx ng build --configuration $Configuration
-    npx ng serve --host $Host --port $Port --open
+    npx ng serve --host $ServeHost --port $Port --open
 } finally {
     Pop-Location
 }
