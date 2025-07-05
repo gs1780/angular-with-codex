@@ -5,7 +5,7 @@ param(
     [string]$ResourceGroup = "eastasia-rg1",
     [string]$Location = "East Asia",
     [string]$ZipName = "publish.zip",
-    [string]$SevenZipPath = "7z"
+    [string]$SevenZipPath = 'C:\Program Files\7-Zip\7z.exe'
 )
 
 $ErrorActionPreference = 'Stop'
