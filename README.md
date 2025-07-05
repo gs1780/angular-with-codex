@@ -14,17 +14,20 @@ The script installs dependencies, runs the Angular build for the specified confi
 
 ### Deploy to Azure
 
-Use the `deploy-to-azure.ps1` script to build the Angular project with the default `dev` configuration and push the static content to an Azure App Service. The script assumes the resource group and app service plan already exist and will create the web app if needed. The deploy script targets the Node 20 runtime and uses `az webapp deploy` to publish a ZIP archive.
+Run the `deploy-eastasia-static-app.ps1` script to build the Angular project and
+push the generated files to an Azure Static Web App. The script checks whether
+the static web app exists and creates it using `az staticwebapp create` if
+necessary. The ZIP archive created from the Angular build is then uploaded
+with `az staticwebapp upload`.
 
 ```powershell
-pwsh ./scripts/deploy-to-azure.ps1
+pwsh ./powershell-scripts/deploy-eastasia-static-app.ps1
 ```
 
 Default parameters:
-- `ResourceGroup`: `india-app-service-rg`
-- `PlanName`: `india-app-plan-3749`
-- `Location`: `Central India`
-- `WebAppName`: `angular-static-app-3749`
+- `ResourceGroup`: `eastasia-rg1`
+- `Location`: `East Asia`
+- `WebAppName`: `eastasia-static-angular`
 
 ## Running with Express
 
