@@ -2,7 +2,7 @@
 
 ## Helper Scripts
 
-This repository includes a PowerShell script that builds the Angular application and creates a ZIP archive of the published files.
+This repository includes PowerShell scripts to build the Angular application and deploy the static output to Azure Static Web Apps.
 
 ### Usage
 
@@ -10,7 +10,7 @@ This repository includes a PowerShell script that builds the Angular application
 pwsh ./scripts/build-and-publish.ps1 -Configuration prod -ZipName publish.zip
 ```
 
-The script installs dependencies, runs the Angular build for the specified configuration, and then archives the `dist/employee-app` output into `publish.zip`. Archive entries use forward slashes so the ZIP can be extracted consistently on any platform.
+The `build-and-publish.ps1` script (not shown in this repo) demonstrates how to create a ZIP archive from the `dist/employee-app` folder. The deployment script described below now uploads the folder directly instead of creating an archive.
 
 ### Deploy to Azure
 
@@ -24,8 +24,8 @@ az extension add --name staticwebapp
 Run the `deploy-eastasia-static-app.ps1` script to build the Angular project and
 push the generated files to an Azure Static Web App. The script checks whether
 the static web app exists and creates it using `az staticwebapp create` if
-necessary. The ZIP archive created from the Angular build is then uploaded
-with `az staticwebapp upload`.
+necessary. The build output from `dist/employee-app` is uploaded directly using
+`az staticwebapp upload`.
 
 ```powershell
 pwsh ./powershell-scripts/deploy-eastasia-static-app.ps1
